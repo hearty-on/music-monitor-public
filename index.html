@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="국내외 음악 플랫폼의 수집 기록과 월별 유통사 노출 점유율을 확인하세요.">
+  <meta name="theme-color" content="#f6f7f9">
+  <title>Music Monitor — 음악 플랫폼 모니터링</title>
+  <link rel="stylesheet" href="./styles.css">
+  <script src="./app.js" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">본문으로 이동</a>
+  <aside class="sidebar">
+    <a class="brand" href="./" aria-label="Music Monitor 홈"><span class="brand-icon">m<span>↗</span></span><span>MUSIC<br>MONITOR<span class="brand-caption">음악 플랫폼 모니터링</span></span></a>
+    <p class="nav-caption">WORKSPACE</p>
+    <nav aria-label="주 메뉴">
+      <button class="nav-item active" data-scope="domestic" aria-pressed="true"><span aria-hidden="true">◫</span> 국내 플랫폼 <span class="nav-arrow" aria-hidden="true">↗</span></button>
+      <button class="nav-item" data-scope="overseas" aria-pressed="false"><span aria-hidden="true">◎</span> 해외 플랫폼 <span class="nav-arrow" aria-hidden="true">↗</span></button>
+      <a class="nav-item" href="#method"><span aria-hidden="true">≡</span> 집계 기준</a>
+    </nav>
+    <div class="sidebar-bottom"><span class="public-badge"><span></span> PUBLIC ARCHIVE</span><p>음악의 흐름을 기록합니다.<br>매일 쌓이는 플랫폼의 변화.</p><span class="edition">MUSIC INTELLIGENCE / 01</span></div>
+  </aside>
+  <div class="workspace">
+    <header class="topbar"><span>음악 데이터 아카이브 <span class="breadcrumb">/</span> <strong id="breadcrumb">국내 플랫폼</strong></span><span class="topbar-tag">공개 열람 <span aria-hidden="true">↗</span></span></header>
+    <main id="main">
+      <div class="heading-row"><div><p class="eyebrow">PLATFORM OVERVIEW</p><h1 id="page-title">국내 플랫폼</h1><p class="subtitle" id="page-description">최신 앨범의 흐름과 유통사별 노출 비중을 한눈에.</p></div><div class="update-label"><span class="status-dot"></span> 자료 갱신 <time id="updated">확인 중</time></div></div>
+      <div id="notice" role="status" aria-live="polite">수집 기록을 불러오고 있습니다.</div>
+      <section class="filters" aria-label="자료 선택"><label class="month-label"><span>조회 월</span><input id="month" type="month" aria-describedby="month-help"></label><span id="month-help" class="filter-help">한국 시간 기준</span><div class="platforms" id="platforms" role="group" aria-label="플랫폼 선택"></div></section>
+      <section class="metrics" aria-label="조회 요약">
+        <article class="metric"><span class="metric-label">선택 월 수집 기록 <span aria-hidden="true">↗</span></span><strong id="record-count">—</strong><span class="metric-foot" id="record-foot">반복 수집 포함</span></article>
+        <article class="metric"><span class="metric-label" id="second-label">집계 유통사 <span aria-hidden="true">◫</span></span><strong id="company-count">—</strong><span class="metric-foot" id="company-foot">미확인 별도 표시</span></article>
+        <article class="metric"><span class="metric-label">최근 수집일 <span aria-hidden="true">◷</span></span><strong class="date-number" id="latest-date">—</strong><span class="metric-foot" id="latest-foot">선택한 월·플랫폼 기준</span></article>
+      </section>
+      <section class="share-panel panel" id="share-section" aria-labelledby="share-title">
+        <div class="panel-header"><div><p class="eyebrow">MONTHLY DISTRIBUTION</p><h2 id="share-title">유통사별 점유율</h2></div><span class="chip" id="period-chip">월별 집계</span></div>
+        <p class="panel-description">최신 앨범 목록 수집 건수 기준 · 같은 앨범도 수집될 때마다 집계합니다.</p>
+        <div class="share-layout"><div class="donut-block"><div id="donut" class="donut" role="img" aria-label="점유율 자료 없음"><div class="donut-hole"><span>수집 건수</span><strong id="donut-total">0</strong><span id="donut-caption">전체 플랫폼</span></div></div><p class="donut-note">매출·재생량 기준이 아닌<br>최신 앨범 목록의 노출 비중입니다.</p></div><div class="share-table-wrap"><table class="share-table"><caption class="sr-only">유통사별 수집 건수와 점유율</caption><thead><tr><th scope="col">유통사</th><th scope="col">수집 건수</th><th scope="col">점유율</th></tr></thead><tbody id="shares"></tbody></table></div></div>
+        <p class="coverage-note" id="coverage-note"></p>
+      </section>
+      <section class="panel records-panel" aria-labelledby="records-title">
+        <div class="panel-header"><div><p class="eyebrow">COLLECTION ARCHIVE</p><h2 id="records-title">수집 기록 <span class="count-chip" id="filtered-count">0</span></h2></div><span class="archive-note">과거 기록 포함</span></div>
+        <div class="record-tools"><label class="search-wrap"><span aria-hidden="true">⌕</span><input id="search" type="search" placeholder="앨범 정보, 아티스트, 유통사 검색" aria-label="수집 기록 검색"></label><label class="date-filter">수집일 <select id="date"><option value="">전체 날짜</option></select></label></div>
+        <div class="table-scroll"><table class="records-table"><caption class="sr-only">음악 플랫폼 수집 기록</caption><thead><tr><th scope="col">수집 일시</th><th scope="col">플랫폼</th><th scope="col">순서</th><th scope="col">앨범 / 곡 정보</th><th scope="col">유통사 / 기획사</th></tr></thead><tbody id="records"></tbody></table></div>
+        <div class="pagination"><span id="page-info">기록을 불러오는 중입니다.</span><div><button id="prev" aria-label="이전 페이지">←</button><span id="page-number">0 / 0</span><button id="next" aria-label="다음 페이지">→</button></div></div>
+      </section>
+      <section id="method" class="method"><span class="method-icon" aria-hidden="true">i</span><div><h2>이렇게 집계합니다</h2><p>국내 점유율 = 해당 유통사의 수집 건수 ÷ 선택한 월·플랫폼의 전체 수집 건수 × 100. 전체 통합은 국내 5개 플랫폼의 건수를 합산하며, 플랫폼 간·수집 시점 간 반복 기록도 모두 포함합니다. 유통사를 확인하지 못한 기록은 ‘미확인’으로 표시하고 분모에 포함합니다.</p><p>플랫폼마다 수집 개수와 횟수가 다르므로 전체 통합 비율에도 그 차이가 반영됩니다. 실패한 수집의 누락분은 추정하지 않습니다. 이번 달은 진행 중 자료이며, 화면 검색·날짜 필터는 기록 목록에만 적용됩니다.</p><p>표시 비율은 소수점 첫째 자리로 반올림하므로 합계가 100%와 조금 다를 수 있습니다. 국내 자료는 기존 유통사 표기를 사용하며, 해외의 ‘유통사 / 기획사’에는 지정 기획사 표기가 포함될 수 있습니다.</p></div></section>
+      <footer><span class="footer-brand">MUSIC MONITOR</span><span>공개 음악 모니터링 아카이브 · Asia/Seoul</span></footer>
+    </main>
+  </div>
+</body>
+</html>
